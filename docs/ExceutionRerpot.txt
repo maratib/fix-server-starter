@@ -1,0 +1,37 @@
+ BeginString    (8) FIXT.1.1
+      BodyLength    (9) 335
+         MsgType   (35) 8 - ExecutionReport
+    SenderCompID   (49) refinitiv
+    TargetCompID   (56) sophis
+       MsgSeqNum   (34) 57
+     SendingTime   (52) 20221116-09:45:03
+         ClOrdID   (11) 468055
+        OrderQty   (38) 400000
+          LastPx   (31) .37
+         OrdType   (40) 1 - Market
+          Symbol   (55) EUR
+    TransactTime   (60) 20221116-12:44:09.635
+       SettlDate   (64) 20221120
+       PriceType  (423) 1 - Percentage
+         OrderID   (37) refinitiv_g4
+          ExecID   (17) 604011978
+        ExecType  (150) F - Trade
+       OrdStatus   (39) 2 - Filled
+            Side   (54) 1 - Buy
+      NoPartyIDs  (453) 2
+         PartyID  (448) GFHIBHBM
+   PartyIDSource  (447) B - BIC
+       PartyRole  (452) 1 - ExecutingFirm
+         PartyID  (448) e10680
+   PartyIDSource  (447) C - GeneralIdentifier
+       PartyRole  (452) 11 - OrderOriginationTrader
+         Account    (1) account
+SecurityIDSource   (22) 2 - SEDOL
+    MaturityDate  (541) 20221130
+            Text   (58) Fixed Murabaha
+                 (23001) Zinc
+                 (23002) 12.03
+                 (23003) 3.65
+        Currency   (15) EUR
+         LastQty   (32) 1000000
+        CheckSum   (10) 019
