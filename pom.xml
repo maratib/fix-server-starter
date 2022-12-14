@@ -33,9 +33,20 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.quickfixj</groupId>
 			<artifactId>quickfixj-all</artifactId>
+			<version>2.3.1</version>
+		</dependency> -->
+
+		<dependency>
+			<groupId>org.quickfixj</groupId>
+			<artifactId>quickfixj-core</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quickfixj</groupId>
+			<artifactId>quickfixj-messages-fix50sp2</artifactId>
 			<version>2.3.1</version>
 		</dependency>
 

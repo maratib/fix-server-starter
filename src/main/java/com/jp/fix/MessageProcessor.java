@@ -2,10 +2,12 @@ package com.jp.fix;
 
 import org.springframework.stereotype.Component;
 
+import com.jp.fix.server.Messages;
+import com.jp.fix.server.ServerApplication;
+
 import lombok.extern.slf4j.Slf4j;
-import quickfix.*;
-import quickfix.fix50sp2.*;
 import quickfix.fix50sp2.Message;
+import quickfix.*;
 import quickfix.field.*;
 
 @Slf4j
@@ -18,15 +20,6 @@ public class MessageProcessor {
 
     public void sendSampleMsg() {
 
-        ExecutionReport exe = new ExecutionReport();
-        // genOrderID(), genExecID(), new ExecType(ExecType.TRADE), new OrdStatus(
-        // OrdStatus.FILLED),
-        // Side.SELL, new LeavesQty(0), new CumQty(
-        // orderQty.getValue()));;
-
-        exe.set(genOrderID());
-        exe.set(genExecID());
-        exe.set(new ExecType(ExecType.NEW));
         // exe.set
 
         // quickfix.fix50.ExecutionReport accept = new quickfix.fix50.ExecutionReport(
@@ -35,7 +28,10 @@ public class MessageProcessor {
         // '1', new LeavesQty(0),
         // new CumQty(0));
 
-        // sendMessage(null, null);
+        // sendMessage(ServerApplication.sessionID, exe);
+        // sendMessage(ServerApplication.sessionID, Messages.getExecMessage());
+        sendMessage(ServerApplication.sessionID, Messages.getExecution());
+        // sendMessage(ServerApplication.sessionID, Messages.getReport1());
     }
 
     private void sendMessage(SessionID sessionID, Message message) {
@@ -43,16 +39,26 @@ public class MessageProcessor {
         try {
 
             Session session = Session.lookupSession(sessionID);
+
             if (session == null) {
                 throw new SessionNotFound(sessionID.toString());
             }
 
             DataDictionaryProvider dataDictionaryProvider = session.getDataDictionaryProvider();
             if (dataDictionaryProvider != null) {
+                System.out.println("Ssssss 3");
                 try {
+
                     dataDictionaryProvider.getApplicationDataDictionary(
-                            getApplVerID(session, message)).validate(message, true);
+                            getApplVerID(session)).validate(message, true);
+
+                    System.out.println("Ssssss 4");
+
                 } catch (Exception e) {
+
+                    // e.printStackTrace();
+                    System.out.println(e.getMessage());
+
                     LogUtil.logThrowable(sessionID, "Outgoing message failed validation: "
                             + e.getMessage(), e);
                     return;
@@ -67,24 +73,13 @@ public class MessageProcessor {
 
     }
 
-    private ApplVerID getApplVerID(Session session, Message message) {
+    private ApplVerID getApplVerID(Session session) {
         String beginString = session.getSessionID().getBeginString();
         if (FixVersions.BEGINSTRING_FIXT11.equals(beginString)) {
-            return new ApplVerID(ApplVerID.FIX50);
+            return new ApplVerID(ApplVerID.FIX50SP2);
         } else {
             return MessageUtils.toApplVerID(beginString);
         }
-    }
-
-    private int m_orderID = 0;
-    private int m_execID = 0;
-
-    private OrderID genOrderID() {
-        return new OrderID(Integer.toString(++m_orderID));
-    }
-
-    private ExecID genExecID() {
-        return new ExecID(Integer.toString(++m_execID));
     }
 
 }

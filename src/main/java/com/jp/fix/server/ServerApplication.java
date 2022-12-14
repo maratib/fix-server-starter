@@ -31,13 +31,13 @@ public class ServerApplication implements Application {
     @Override
     public void toAdmin(Message msg, SessionID sessionID) {
         // msg.setString(141, LOGGED_IN);
-        System.out.println(String.format("toAdmin: {%s}, {%s}", msg, sessionID));
+        // System.out.println(String.format("toAdmin: {%s}, {%s}", msg, sessionID));
     }
 
     @Override
     public void fromAdmin(Message msg, SessionID sessionID)
             throws FieldNotFound, IncorrectDataFormat, IncorrectTagValue, RejectLogon {
-        System.out.println(String.format("fromAdmin: {%s}, {%s}", msg, sessionID));
+        // System.out.println(String.format("fromAdmin: {%s}, {%s}", msg, sessionID));
     }
 
     @Override
